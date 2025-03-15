@@ -1,4 +1,4 @@
-import { $, $a, create, append, copy, get, COMMON_INTERVAL } from "../monat/module.js";
+import { $, $a, create, append, copy, get, error, COMMON_INTERVAL } from "../monat/module.js";
 
 export default function(master) {
   const meta = {
@@ -35,6 +35,12 @@ export default function(master) {
   let isChanged = false;
 
   const $boxLoading = $("#loading-screen");
+  const $btnCloseLoading = $("#button-close-loading-screen");
+
+  $btnCloseLoading.onclick = () => {
+    $btnCloseLoading.style["display"] = "none";
+    $boxLoading.style["display"] = "none";
+  };
 
   const $uploader = $("#uploader");
   const $preview = $("#preview");
@@ -213,6 +219,9 @@ export default function(master) {
           });
         };
       };
+    }).catch((e) => {
+      error(e);
+      $btnCloseLoading.style["display"] = null;
     });
   };
 
