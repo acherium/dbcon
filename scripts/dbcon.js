@@ -302,6 +302,7 @@ export default function(master) {
           $input.value = options[x][y];
         };
         refreshGrid();
+        if ($chkTglFit.checked) doAutoFit();
       };
     };
   };
