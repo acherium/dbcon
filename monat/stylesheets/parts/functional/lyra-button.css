@@ -1,0 +1,236 @@
+@charset "UTF-8";
+/* 버튼 속성값 */
+:root {
+  --button-size: 36px;
+  --button-padding: 8px;
+  --button-gap: 4px;
+  --button-radius: 6px;
+
+  --float-button-size: 44px;
+  --float-button-padding: 12px;
+  --float-button-radius: 22px;
+
+  --button-border: var(--border);
+  --button-background: oklch(from var(--main) l c h/1);
+}
+
+/* 버튼 공통 */
+button {
+  display: flex;
+  position: relative;
+  gap: var(--button-gap);
+  padding: var(--button-padding);
+  place-items: center start;
+
+  min-width: var(--button-size);
+  height: var(--button-size);
+
+  font-size: 11pt;
+  color: var(--font);
+  border: unset;
+  border-radius: var(--button-radius);
+  background-color: var(--button-background);
+  user-select: none;
+}
+
+button:focus-visible { outline: solid 2px var(--accent); }
+
+button::before,
+button::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: inherit;
+  content: "";
+
+  transition: var(--duration-ui);
+  transition-property: opacity, border-color;
+}
+
+button::before { border: solid 1px var(--button-border); }
+button::after {
+  background-color: var(--black);
+  opacity: 0;
+}
+
+button > * {
+  color: inherit;
+  user-select: none;
+  pointer-events: none;
+}
+
+button[outline] { background-color: transparent; }
+button[blank] { background-color: transparent; }
+button[blank]::before { border-color: transparent; }
+
+/* 활성화된 버튼 */
+button:not(:disabled) { cursor: pointer; }
+button:not(:disabled):hover::after { opacity: 0.1; }
+button:not(:disabled):active::after { opacity: 0.2; }
+
+/* 비활성화된 버튼 */
+button:disabled {
+  color: var(--palette-3-gs);
+  cursor: no-drop;
+}
+
+/* 활성화된 색상 버튼 */
+:is(button[accent], button[red], button[orange], button[yellow], button[green], button[blue], button[navy], button[purple],
+button[turquoise], button[skyblue], button[pink])::before { border-color: oklch(0% 0 0/0.5); }
+
+button[accent]:not(:disabled) {
+  color: var(--white);
+  background-color: var(--accent);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[red]:not(:disabled) {
+  color: var(--white);
+  background-color: var(--red);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[orange]:not(:disabled) {
+  color: var(--white);
+  background-color: var(--orange);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[yellow]:not(:disabled) {
+  color: var(--black);
+  background-color: var(--yellow);
+  --icon: oklch(from var(--black) l c h/0.7);
+}
+
+button[green]:not(:disabled) {
+  color: var(--black);
+  background-color: var(--green);
+  --icon: oklch(from var(--black) l c h/0.7);
+}
+
+button[blue]:not(:disabled) {
+  color: var(--white);
+  background-color: var(--blue);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[navy]:not(:disabled) {
+  color: var(--white);
+  background-color: var(--navy);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[purple]:not(:disabled) {
+  color: var(--white);
+  background-color: var(--purple);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[turquoise]:not(:disabled) {
+  color: var(--black);
+  background-color: var(--turquoise);
+  --icon: oklch(from var(--black) l c h/0.7);
+}
+
+button[skyblue]:not(:disabled) {
+  color: var(--black);
+  background-color: var(--skyblue);
+  --icon: oklch(from var(--black) l c h/0.7);
+}
+
+button[pink]:not(:disabled) {
+  color: var(--black);
+  background-color: var(--pink);
+  --icon: oklch(from var(--black) l c h/0.7);
+}
+
+/* 비활성화된 색상 버튼 */
+button[accent]:disabled {
+  color: var(--white);
+  background-color: var(--accent-gs);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[red]:disabled {
+  color: var(--white);
+  background-color: var(--red-gs);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[orange]:disabled {
+  color: var(--white);
+  background-color: var(--orange-gs);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[yellow]:disabled {
+  color: var(--black);
+  background-color: var(--yellow-gs);
+  --icon: oklch(from var(--black) l c h/0.7);
+}
+
+button[green]:disabled {
+  color: var(--black);
+  background-color: var(--green-gs);
+  --icon: oklch(from var(--black) l c h/0.7);
+}
+
+button[blue]:disabled {
+  color: var(--white);
+  background-color: var(--blue-gs);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[navy]:disabled {
+  color: var(--white);
+  background-color: var(--navy-gs);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[purple]:disabled {
+  color: var(--white);
+  background-color: var(--purple-gs);
+  --icon: oklch(from var(--white) l c h/0.8);
+}
+
+button[turquoise]:disabled {
+  color: var(--black);
+  background-color: var(--turquoise-gs);
+  --icon: oklch(from var(--black) l c h/0.7);
+}
+
+button[skyblue]:disabled {
+  color: var(--black);
+  background-color: var(--skyblue-gs);
+  --icon: oklch(from var(--black) l c h/0.7);
+}
+
+button[pink]:disabled {
+  color: var(--black);
+  background-color: var(--pink-gs);
+  --icon: oklch(from var(--black) l c h/0.7);
+}
+
+/* 버튼 내부 문자열 */
+button > span { margin: 0 2px; }
+
+/* 플로팅 버튼 */
+button[float] {
+  padding: var(--float-button-padding);
+
+  min-width: var(--float-button-size);
+  min-height: var(--float-button-size);
+
+  color: var(--main);
+  border-radius: var(--float-button-radius);
+  background-color: var(--anti);
+  --icon: var(--main);
+}
+button[float]::before { content: unset; }
+button[float]::after { background-color: var(--main); }

@@ -1,0 +1,106 @@
+@charset "UTF-8";
+/* display 값 */
+[none] { display: none !important; }
+[block] { display: block !important; }
+[inline] { display: inline !important; }
+[inlineblock] { display: inline-block !important; }
+[flex] { display: flex !important; }
+[grid] { display: grid !important; }
+
+/* 박스 모델, 레이아웃 수치 관련 */
+[nomargin] { margin: 0 !important; }
+[nopadding] { padding: 0 !important; }
+[nogap] { gap: 0 !important; }
+[gap] { gap: var(--gap) !important; }
+[flexrow] { flex-direction: row !important; }
+[flexcolumn] { flex-direction: column !important; }
+
+/* 크기 옵션 */
+[widthfull] { width: 100% !important; }
+[heightfull] { height: 100% !important; }
+[flexfull] { flex: 1 !important; }
+
+/* 텍스트 옵션 */
+[no-select] { user-select: none !important; }
+
+[bolder] { font-weight: 900 !important; }
+[bold] { font-weight: 700 !important; }
+[weightnormal] { font-weight: 400 !important; }
+[light] { font-weight: 200 !important; }
+[lighter] { font-weight: 100 !important; }
+
+[stylenormal] { font-style: normal !important; }
+[italic] { font-style: italic !important; }
+[oblique] { font-style: oblique !important; }
+
+[underline] { text-decoration-line: underline !important;}
+[linethrough] { text-decoration-line: line-through !important;}
+[overline] { text-decoration-line: overline !important;}
+[underline][linethrough] { text-decoration-line: underline line-through !important; }
+[linethrough][overline] { text-decoration-line: line-through overline !important; }
+[underline][overline] { text-decoration-line: underline overline !important; }
+[underline][linethrough][overline] { text-decoration-line: underline line-through overline !important; }
+
+[wordbreak] { word-break: break-all !important; }
+
+[textleft] { text-align: left !important; }
+[textcenter] { text-align: center !important; }
+[textright] { text-align: right !important; }
+
+[color-normal] { color: var(--font) !important; }
+[red]:not(:is(button)) { color: var(--red) !important; }
+[orange]:not(:is(button)) { color: var(--orange) !important; }
+[yellow]:not(:is(button)) { color: var(--yellow) !important; }
+[green]:not(:is(button)) { color: var(--green) !important; }
+[blue]:not(:is(button)) { color: var(--blue) !important; }
+[navy]:not(:is(button)) { color: var(--navy) !important; }
+[purple]:not(:is(button)) { color: var(--purple) !important; }
+[turquoise]:not(:is(button)) { color: var(--turquoise) !important; }
+[skyblue]:not(:is(button)) { color: var(--skyblue) !important; }
+[pink]:not(:is(button)) { color: var(--pink) !important; }
+
+[highlight] {
+  margin: 0 -2px -2px -2px;
+  padding: 0 2px 2px 2px;
+
+  color: var(--palette-3);
+  border-radius: 4px;
+  background-color: oklch(from var(--palette-3) l c h/0.15);
+}
+[highlight]:hover { background-color: oklch(from var(--palette-3) l c h/0.2); }
+
+[highlight][color-normal] {
+  color: var(--palette-3) !important;
+  background-color: oklch(from var(--palette-3) l c h/0.15);
+}
+[highlight][red] { background-color: oklch(from var(--red) l c h/0.15); }
+[highlight][orange] { background-color: oklch(from var(--orange) l c h/0.15); }
+[highlight][yellow] { background-color: oklch(from var(--yellow) l c h/0.15); }
+[highlight][green] { background-color: oklch(from var(--green) l c h/0.15); }
+[highlight][blue] { background-color: oklch(from var(--blue) l c h/0.15); }
+[highlight][navy] { background-color: oklch(from var(--navy) l c h/0.15); }
+[highlight][purple] { background-color: oklch(from var(--purple) l c h/0.15); }
+[highlight][turquoise] { background-color: oklch(from var(--turquoise) l c h/0.15); }
+[highlight][skyblue] { background-color: oklch(from var(--skyblue) l c h/0.15); }
+[highlight][pink] { background-color: oklch(from var(--pink) l c h/0.15); }
+
+[sub] {
+  font-size: small !important;
+  color: var(--font-sub) !important;
+}
+
+/* align-items 값 */
+[alignstart] { align-items: start !important; }
+[aligncenter] { align-items: center !important; }
+[alignend] { align-items: end !important; }
+
+/* justify-content 값 */
+[justifystart] { justify-content: start !important; }
+[justifycenter] { justify-content: center !important; }
+[justifyend] { justify-content: end !important; }
+[justifyaround] { justify-content: space-around !important; }
+[justifybetween] { justify-content: space-between !important; }
+[justifyaround] { justify-content: space-around !important; }
+
+/* 테이블 값 */
+[table-fixed] { table-layout: fixed !important; }

@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/* 목록 공통 */
+.list,
+.list-row,
+.list-column,
+.list-rev,
+.list-rev-row,
+.list-rev-column{
+  display: flex;
+  position: relative;
+  gap: var(--gap);
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  max-width: 100%;
+  max-height: 100%;
+  width: fit-content;
+  height: fit-content;
+}
+
+/* 목록 특성별 방향 설정 */
+.list-column { flex-direction: column; }
+.list-rev,
+.list-rev-row { flex-direction: row-reverse; }
+.list-rev-column { flex-direction: column-reverse; }
+
+/* 모바일 뷰 */
+@media screen and (max-width: 900px) {
+  .list { flex-direction: column; }
+  .list-rev { flex-direction: column-reverse; }
+}

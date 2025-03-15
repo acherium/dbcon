@@ -1,0 +1,178 @@
+@charset "UTF-8";
+:root {
+  /* 무채색 */
+  --white: oklch(100% 0 0);
+  --c-n9: oklch(90% 0 0);
+  --c-n8: oklch(80% 0 0);
+  --c-n7: oklch(70% 0 0);
+  --c-n6: oklch(60% 0 0);
+  --c-n5: oklch(50% 0 0);
+  --c-n4: oklch(40% 0 0);
+  --c-n3: oklch(30% 0 0);
+  --c-n2: oklch(20% 0 0);
+  --c-n1: oklch(10% 0 0);
+  --black: oklch(0% 0 0);
+
+  /* 악센트 색상 */
+  --lyra: oklch(61% 0.26 322);
+  --accent: var(--lyra);
+  --accent-alt: var(--lyra);
+
+  /* 악센트 색상 - 그레이스케일 */
+  --lyra-gs: oklch(from var(--lyra) l 0 h);
+  --accent-gs: var(--lyra-gs);
+  --accent-alt-gs: var(--lyra-gs);
+
+  /* 악센트 기반 색상 */
+  --accent-light: oklch(from var(--accent) 97% 0.009 h);
+  --accent-medium: oklch(from var(--accent) 90% 0.05 h);
+  --accent-deep: oklch(from var(--accent) 40% 0.2 h);
+  --accent-dark: oklch(from var(--accent) 23% 0.03 h);
+
+  /* 악센트 기반 색상 - 그레이스케일 */
+  --accent-light-gs: oklch(from var(--accent-light) l 0 h);
+  --accent-medium-gs: oklch(from var(--accent-medium) l 0 h);
+  --accent-deep-gs: oklch(from var(--accent-deep) l 0 h);
+  --accent-dark-gs: oklch(from var(--accent-dark) l 0 h);
+
+  /* 기본 7 색상 */
+  --red: oklch(61% 0.23 25);
+  --orange: oklch(68% 0.15 46);
+  --yellow: oklch(84% 0.15 88);
+  --green: oklch(67.5% 0.15 143);
+  --blue: oklch(49% 0.2 264);
+  --navy: oklch(33.7% 0.14 271);
+  --purple: oklch(52.4% 0.2 303);
+
+  /* 기본 7 색상 - 그레이스케일 */
+  --red-gs: oklch(from var(--red) l 0 h);
+  --orange-gs: oklch(from var(--orange) l 0 h);
+  --yellow-gs: oklch(from var(--yellow) l 0 h);
+  --green-gs: oklch(from var(--green) l 0 h);
+  --blue-gs: oklch(from var(--blue) l 0 h);
+  --navy-gs: oklch(from var(--navy) l 0 h);
+  --purple-gs: oklch(from var(--purple) l 0 h);
+
+  /* 기타 색상 */
+  --turquoise: oklch(77.7% 0.12 182);
+  --skyblue: oklch(74% 0.12 225);
+  --pink: oklch(77.7% 0.12 14.5);
+
+  /* 기타 색상 - 그레이스케일 */
+  --turquoise-gs: oklch(from var(--turquoise) l 0 h);
+  --skyblue-gs: oklch(from var(--skyblue) l 0 h);
+  --pink-gs: oklch(from var(--pink) l 0 h);
+
+  /* 동적 팔레트 */
+  --palette-0: var(--white);
+  --palette-1: var(--accent-light);
+  --palette-2: var(--accent-medium);
+  --palette-3: var(--accent);
+  --palette-4: var(--accent-deep);
+  --palette-5: var(--accent-dark);
+  --palette-6: var(--black);
+
+  /* 동적 팔레트 - 그레이스케일 */
+  --palette-0-gs: oklch(from var(--palette-0) l 0 h);
+  --palette-1-gs: oklch(from var(--palette-1) l 0 h);
+  --palette-2-gs: oklch(from var(--palette-2) l 0 h);
+  --palette-3-gs: oklch(from var(--palette-3) l 0 h);
+  --palette-4-gs: oklch(from var(--palette-4) l 0 h);
+  --palette-5-gs: oklch(from var(--palette-5) l 0 h);
+  --palette-6-gs: oklch(from var(--palette-6) l 0 h);
+
+  /* 기본 요소 */
+  --main: oklch(100% 0 0);
+  --sub: oklch(98% 0 0);
+  --border: oklch(80% 0 0);
+  --font: oklch(0% 0 0);
+  --font-sub: oklch(50% 0 0);
+  --icon: oklch(0% 0 0/0.5);
+  --anti: oklch(0% 0 0);
+  --shadow: 0 2px 10px oklch(from var(--anti) l c h/0.1);
+
+  /* 기본 요소 - 그레이스케일 */
+  --main-gs: oklch(from var(--palette-1) l 0 h);
+  --sub-gs: oklch(from var(--palette-2) l 0 h);
+  --border-gs: oklch(from var(--palette-4) l 0 h);
+  --font-gs: oklch(from var(--palette-5) l 0 h);
+  --anti-gs: oklch(from var(--palette-5) l 0 h);
+
+  /* 공통 속성 */
+  /* 마진 */
+  --margin-tiny: 2px;
+  --margin-small: 4px;
+  --margin-medium: 8px;
+  --margin-large: 12px;
+  --margin: var(--margin-small);
+
+  /* 패딩 */
+  --padding-tiny: 2px;
+  --padding-small: 4px;
+  --padding-medium: 8px;
+  --padding-large: 12px;
+  --padding-huge: 24px;
+  --padding: var(--padding-medium);
+
+  /* 간격 */
+  --gap-tiny: 2px;
+  --gap-small: 4px;
+  --gap-medium: 8px;
+  --gap-large: 12px;
+  --gap: var(--gap-small);
+
+  /* 곡률 */
+  --radius-tiny: 2px;
+  --radius-small: 4px;
+  --radius-medium: 8px;
+  --radius-large: 20px;
+  --radius: var(--radius-small);
+
+  /* 트랜지션 */
+  --duration-ui: 0.15s;
+}
+
+/* 다크모드 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 동적 팔레트 */
+    --palette-0: var(--black);
+    --palette-1: var(--accent-dark);
+    --palette-2: var(--accent-deep);
+    --palette-3: oklch(from var(--accent) 75% c h);
+    --palette-4: var(--accent-medium);
+    --palette-5: var(--accent-light);
+    --palette-6: var(--white);
+    
+    /* 기본 요소 */
+    --main: oklch(0% 0 0);
+    --sub: oklch(30% 0 0);
+    --border: oklch(40% 0 0);
+    --font: oklch(100% 0 0);
+    --font-sub: oklch(50% 0 0);
+    --icon: oklch(100% 0 0/0.5);
+    --anti: oklch(100% 0 0);
+    --shadow: 0 2px 10px oklch(from var(--anti) l c h/0.1);
+  }
+}
+
+:root[forcedarkmode] {
+  /* 동적 팔레트 */
+  --palette-0: var(--black);
+  --palette-1: var(--accent-dark);
+  --palette-2: var(--accent-deep);
+  --palette-3: oklch(from var(--accent) 75% c h);
+  --palette-4: var(--accent-medium);
+  --palette-5: var(--accent-light);
+  --palette-6: var(--white);
+  
+  /* 기본 요소 */
+  --main: oklch(0% 0 0);
+  --sub: oklch(30% 0 0);
+  --border: oklch(40% 0 0);
+  --font: oklch(100% 0 0);
+  --font-sub: oklch(50% 0 0);
+  --icon: oklch(100% 0 0/0.5);
+  --anti: oklch(100% 0 0);
+  --shadow: 0 2px 10px oklch(from var(--anti) l c h/0.1);
+}

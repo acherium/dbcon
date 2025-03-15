@@ -1,0 +1,51 @@
+@charset "UTF-8";
+/* 아코디언 속성값 */
+:root {
+  --details-size: 36px;
+  --details-padding: 8px;
+  --details-radius: 6px;
+  
+  --details-border: var(--border);
+  --details-background: oklch(from var(--anti) l c h/0);
+}
+
+/* 아코디언 */
+details {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
+  max-width: 100%;
+  
+  font-size: 1rem;
+  border: solid 1px var(--border);
+  border-radius: var(--details-radius);
+  outline: unset;
+  background-color: var(--details-background);
+}
+
+summary {
+  display: flex;
+  padding: var(--details-padding);
+
+  max-width: 100%;
+  min-width: var(--details-size);
+  min-height: var(--details-size);
+
+  list-style: none;
+  cursor: pointer;
+}
+
+summary::marker { display: none; }
+summary > i.summary-arrow {
+  margin-left: auto;
+
+  mask-image: var(--lyra-icon-expand-s);
+}
+details[open] > summary > i.summary-arrow { mask-image: var(--lyra-icon-expand-n); }
+
+details > div {
+  padding: var(--details-padding);
+
+  border-top: solid 1px var(--border);
+}

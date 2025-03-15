@@ -1,0 +1,255 @@
+@charset "UTF-8";
+/* 창 속성 값 */
+:root {
+  --window-area-padding: 8px;
+  
+  --window-border-width: 1px;
+  --window-radius: 6px;
+  --window-border-active: var(--accent);
+  --window-border-inactive: var(--border);
+
+  --window-inner-padding: 8px;
+  --window-inner-background: var(--main);
+  --window-inner-shadow: var(--shadow);
+
+  --window-titlebar-size: 36px;
+  --window-titlebar-padding: 8px;
+  --window-titlebar-gap: 4px;
+  --window-titlebar-background: var(--main);
+  --window-titlebar-font-active: var(--font);
+  --window-titlebar-font-inactive: var(--font-sub);
+
+  --window-bottom-padding: 8px;
+  --window-bottom-gap: 4px;
+  --window-bottom-border: var(--border);
+  --window-bottom-background: var(--sub);
+}
+
+/* 창 */
+window {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: var(--window-area-padding);
+  z-index: 100;
+  overflow: hidden;
+
+  width: 100%;
+  height: 100%;
+  
+  pointer-events: none;
+}
+
+window > inner {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  overflow: hidden;
+
+  max-width: calc(100dvw - var(--window-area-padding) * 2);
+  max-height: calc(100dvh - var(--window-area-padding) * 2);
+  width: max-content;
+  height: max-content;
+  flex-shrink: 0;
+
+  border: solid var(--window-border-width) var(--window-border-inactive);
+  border-radius: var(--window-radius);
+  background-color: var(--window-inner-background);
+  box-shadow: var(--window-inner-shadow);
+  pointer-events: auto;
+
+  /* animation: var(--duration-ui) cubic-bezier(0.02, 0.61, 0.47, 0.99) both ani-window-open; */
+}
+@keyframes ani-window-open {
+  from {
+    opacity: 0;
+
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+
+    transform: translateY(0px) scale(1);
+  }
+}
+
+window > outer {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  
+  width: 100%;
+  height: 100%;
+
+  background-color: oklch(from var(--main) l c h/0.7);
+  backdrop-filter: blur(15px);
+  opacity: 0;
+  pointer-events: auto;
+
+  transition: opacity var(--duration-ui);
+}
+
+/* 제목 표시줄 */
+window > inner > titlebar {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: var(--window-titlebar-size);
+
+  background-color: var(--window-titlebar-inactive);
+  user-select: none;
+  touch-action: none;
+}
+
+window > inner > titlebar > :is(.left, .right) {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  width: max-content;
+  height: inherit;
+
+  background-color: inherit;
+}
+
+window > inner > titlebar > .left {
+  gap: var(--window-titlebar-gap);
+  padding: 0 var(--window-titlebar-padding);
+  margin-right: auto;
+  overflow: hidden;
+
+  width: auto;
+
+  pointer-events: none;
+}
+window > inner > titlebar > .left > .icon {
+  overflow: hidden;
+  order: -1;
+
+  width: 20px;
+  height: 20px;
+}
+window > inner > titlebar > .left > span {
+  overflow: hidden;
+  
+  color: var(--window-titlebar-font-inactive);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+window > inner > titlebar > .right {
+  flex-direction: row-reverse;
+  margin-left: auto;
+
+  --icon: var(--window-titlebar-font-inactive);
+}
+window > inner > titlebar > .right > button {
+  justify-content: center;
+
+  border-radius: unset;
+}
+window > inner > titlebar > .right > button::before { border: unset; }
+
+/* 주 영역 */
+window > inner > windowbody {
+  display: block;
+  padding: var(--window-inner-padding);
+
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+/* 하단 영역 */
+window > inner > bottom {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: var(--window-bottom-padding);
+
+  width: 100%;
+
+  border-top: solid 1px var(--window-bottom-border);
+  background-color: var(--window-bottom-background);
+}
+
+window > inner > bottom > :is(.left, .right) {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  gap: var(--window-bottom-gap);
+  overflow: hidden;
+
+  width: max-content;
+  height: inherit;
+
+  background-color: inherit;
+}
+
+window > inner > bottom > .left { margin-right: auto; }
+
+window > inner > bottom > .right {
+  flex-direction: row-reverse;
+  margin-left: auto;
+}
+
+window > inner > bottom > :is(.left, .right) > button[accent] { order: -1; }
+
+/* 크기 조절 포인터 */
+window > inner > resizepointer {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+
+  width: 10px;
+  height: 10px;
+
+  cursor: nwse-resize;
+  user-select: none;
+  touch-action: none;
+}
+
+/* 활성 상태 창 */
+window[active] > inner { border-color: var(--window-border-active); }
+window[active] > inner > titlebar { border-color: var(--window-titlebar-active); }
+window[active] > inner > titlebar > .left > span { color: var(--window-titlebar-font-active); }
+window[active] > inner > titlebar > .right > button { --icon: var(--window-titlebar-font-active); }
+
+/* 최대화 */
+window[maximized]:not([minimized]) { padding: 0 !important; }
+window[maximized]:not([minimized]) > inner {
+  left: 0 !important;
+  top: 0 !important;
+
+  max-width: 100dvw !important;
+  max-height: 100dvh !important;
+  width: 100% !important;
+  height: 100% !important;
+
+  border: unset;
+  border-radius: unset;
+
+  transform: unset !important;
+}
+
+/* 최소화 */
+window[minimized] > inner {
+  max-width: 100dvw !important;
+  width: max-content !important;
+  height: max-content !important;
+}
+window[minimized] > inner > *:not(titlebar) { display: none; }

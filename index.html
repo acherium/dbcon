@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>콤보콘 생성기</title>
+  <link rel="shortcut icon" href="./assets/essentials/favicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="./monat/styles.css">
+  <link rel="stylesheet" href="./stylesheets/dbcon.css">
+  <script type="module" src="./monat/init.js"></script>
+  <script src="./scripts/gif-frames.min.js"></script>
+  <script src="./scripts/gifshot.min.js"></script>
+  <script type="module" src="./scripts/dbcon.js" runner></script>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div id="logo">
+        <img src="./assets/essentials/symbol.svg" alt="Project Lyra Symbol" id="symbol" loading="lazy">
+        <img src="./assets/essentials/logotype.svg" alt="Project Lyra Logotype" id="logotype" loading="lazy">
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="wrap">
+      <div id="input-box" class="box">
+        <input type="file" id="uploader" accept="image/gif" autocomplete="off" value="">
+        <div class="list-row">
+          <button id="button-upload" accent><i class="folder"></i><span>파일 업로드</span></button>
+        </div>
+        <div id="preview">
+          <p class="placeholder">여기에 업로드한 GIF 이미지가 표시됩니다</p>
+          <div id="preview-image-container"></div>
+          <div id="preview-grid-container"></div>
+        </div>
+        <div class="list-column">
+          <label><input type="checkbox" id="checkbox-toggle-grid" autocomplete="off" checked><div class="toggle"></div><span>그리드 표시</span></label>
+          <label><input type="checkbox" id="checkbox-toggle-auto-fit" autocomplete="off" checked><div class="toggle"></div><span>크기 자동 맞춤(정방형)</span></label>
+        </div>
+      </div>
+      <div id="output-box" class="box">
+        <div class="list-row">
+          <button id="button-generate" accent><i class="sparkle"></i><span>생성</span></button>
+          <button id="button-refresh" none><i class="clockwise"></i><span>새로고침</span></button>
+          <button id="button-download-all"><i class="download"></i><span>모두 저장</span></button>
+        </div>
+        <div id="output">
+          <p class="placeholder">여기에 생성된 더블콘(콤보콘) 이미지가 표시됩니다</p>
+        </div>
+        <span sub><span highlight accent>모두 저장</span> 버튼을 누르거나 각 이미지를 눌러 저장할 수 있습니다</span>
+      </div>
+      <details>
+        <summary><span>옵션</span><i class="summary-arrow"></i></summary>
+        <div id="option-box">
+          <h4>입력 (px)</h4>
+          <div class="row"><p>가로 오프셋</p><label><input type="text" id="input-position-x" autocomplete="off" value="0"></label></div>
+          <div class="row"><p>세로 오프셋</p><label><input type="text" id="input-position-y" autocomplete="off" value="0"></label></div>
+          <div class="row"><p>가로폭</p><label><input type="text" id="input-area-width" autocomplete="off" value="0"></label></div>
+          <div class="row"><p>세로폭</p><label><input type="text" id="input-area-height" autocomplete="off" value="0"></label></div>
+          <div class="partition"></div>
+          <h4>출력 (px)</h4>
+          <div class="row"><p>가로폭</p><label><input type="text" id="input-output-width" autocomplete="off" value="0"></label></div>
+          <div class="row"><p>세로폭</p><label><input type="text" id="input-output-height" autocomplete="off" value="0"></label></div>
+          <div class="row"><p>행 개수</p><label><input type="text" id="input-grid-y" autocomplete="off" value="0"></label></div>
+          <div class="row"><p>열 개수</p><label><input type="text" id="input-grid-x" autocomplete="off" value="0"></label></div>
+          <div class="partition"></div>
+          <h4>전환</h4>
+          <div class="row"><p>표시 시간 (cs)</p><label><input type="text" id="input-animation-interval" autocomplete="off" value="0"></label></div>
+        </div>
+      </details>
+    </div>
+  </main>
+  <footer>
+    <div class="wrap">
+      <p>
+        Powered by <span LYRA_DISPLAY_NAME></span> by <span LYRA_AUTHOR></span> with <3.<br>
+        Build <span LYRA_VERSION></span>@<span LYRA_DATE></span>.
+      </p>
+      <p>
+        <a href="https://github.com/acherium/dbcon" target="_blank">Visit repository</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <a href="https://www.npmjs.com/package/gifshot" target="_blank">gifshot</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <a href="https://www.npmjs.com/package/gif-frames" target="_blank">gif-frames</a>
+      </p>
+    </div>
+  </footer>
+  <div id="loading-screen" style="display: none;">
+    <il class="hourglass-spin"></il>
+    <p>잠시만 기다려 주세요</p>
+  </div>
+</body>
+</html>

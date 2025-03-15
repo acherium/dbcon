@@ -1,0 +1,40 @@
+@charset "UTF-8";
+/* 입력 칸 속성값 */
+:root {
+  --anchor-visited: oklch(from var(--accent) 20% c h);
+}
+
+/* 앵커 */
+a {
+  margin: 0 -2px -2px -2px;
+  padding: 0 2px 2px 2px;
+
+  text-decoration: dotted 2px underline;
+  color: var(--accent);
+  border-radius: 4px;
+  background-color: oklch(from var(--accent) l c h/0.15);
+}
+
+a:visited {
+  color: var(--anchor-visited);
+  background-color: oklch(from var(--anchor-visited) l c h/0.15);
+}
+
+a:not(:visited):hover { background-color: oklch(from var(--accent) l c h/0.2); }
+a:visited:hover { background-color: oklch(from var(--anchor-visited) l c h/0.2); }
+
+a::before {
+  display: inline-block;
+
+  width: 1.2em;
+  height: 1em;
+  
+  font-size: inherit;
+  color: inherit;
+  line-height: 1;
+  vertical-align: -0.2em;
+  background-color: var(--accent);
+  mask: no-repeat left/1em var(--lyra-icon-export);
+  content: "";
+}
+a:visited::before { background-color: var(--anchor-visited); }

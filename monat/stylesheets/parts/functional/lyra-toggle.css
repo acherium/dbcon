@@ -1,0 +1,109 @@
+@charset "UTF-8";
+/* 토글 속성값 */
+:root {
+  --toggle-label-gap: 4px;
+  --toggle-padding: 4px;
+  --toggle-size: 28px;
+  --toggle-length: 20px;
+  --toggle-radius: calc(var(--toggle-size) / 2);
+  --toggle-border-width: 1px;
+
+  --toggle-border: var(--border);
+}
+
+/* 토글 라벨 */
+label:has(:is(input[type="checkbox"], input[type="radio"])):has(.toggle) {
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: var(--toggle-label-gap);
+}
+
+label:has(:is(input[type="checkbox"], input[type="radio"])):has(.toggle) * { color: inherit; }
+
+label:has(:is(input[type="checkbox"], input[type="radio"])):has(.toggle) > :is(input[type="checkbox"], input[type="radio"]) {
+  position: absolute;
+
+  opacity: 0;
+}
+
+/* 토글 */
+label:has(:is(input[type="checkbox"], input[type="radio"])):has(.toggle) > .toggle {
+  position: relative;
+
+  width: calc(var(--toggle-size) + var(--toggle-length));
+  height: var(--toggle-size);
+
+  border: solid var(--toggle-border-width) var(--toggle-border);
+  border-radius: var(--toggle-radius);
+  background-color: transparent;
+}
+
+label:has(:is(input[type="checkbox"], input[type="radio"]):focus-visible):has(.toggle) > .toggle { outline: solid 2px var(--accent); }
+
+label:has(:is(input[type="checkbox"], input[type="radio"])):has(.toggle) > .toggle::before {
+  position: absolute;
+  left: var(--toggle-padding);
+  top: var(--toggle-padding);
+
+  width: calc(var(--toggle-size) - var(--toggle-padding) * 2 - var(--toggle-border-width) * 2);
+  height: calc(var(--toggle-size) - var(--toggle-padding) * 2 - var(--toggle-border-width) * 2);
+
+  border-radius: inherit;
+  background-color: var(--toggle-border);
+  content: "";
+
+  transform: translateX(0);
+  transition: var(--duration-ui);
+  transition-property: transform, background-color;
+}
+
+label:has(:is(input[type="checkbox"]:checked, input[type="radio"]:checked)):has(.toggle) > .toggle {
+  border-color: var(--accent);
+  background-color: oklch(from var(--palette-3) l c h/0.4);
+}
+label:has(:is(input[type="checkbox"]:checked, input[type="radio"]:checked)):has(.toggle) > .toggle::before {
+  background-color: var(--accent);
+
+  transform: translateX(var(--toggle-length));
+}
+
+label:has(:is(input[type="checkbox"], input[type="radio"])):has(.toggle) > .toggle::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: inherit;
+  background-color: var(--anti);
+  opacity: 0;
+  content: "";
+  
+  transition: opacity var(--duration-ui);
+}
+
+/* 활성화된 토글 */
+label:has(:is(input[type="checkbox"]:not(:disabled), input[type="radio"]:not(:disabled))):has(.toggle) { cursor: pointer; }
+
+label:has(:is(input[type="checkbox"]:not(:disabled), input[type="radio"]:not(:disabled))):has(.toggle):hover > .toggle::after { opacity: 0.1; }
+label:has(:is(input[type="checkbox"]:not(:disabled), input[type="radio"]:not(:disabled))):has(.toggle):active > .toggle::after { opacity: 0.2; }
+
+/* 비활성화된 토글 */
+label:has(:is(input[type="checkbox"]:disabled, input[type="radio"]:disabled)):has(.toggle) {
+  color: var(--palette-3-gs);
+  cursor: no-drop;
+}
+
+label:has(:is(input[type="checkbox"]:disabled, input[type="radio"]:disabled)):has(.toggle) > .toggle {
+  border-color: var(--toggle-border);
+  background-color: oklch(from var(--toggle-border) l c h/0.5);
+}
+label:has(:is(input[type="checkbox"]:disabled, input[type="radio"]:disabled)):has(.toggle) > .toggle::before { background-color: var(--toggle-border); }
+
+label:has(:is(input[type="checkbox"]:disabled:checked, input[type="radio"]:disabled:checked)):has(.toggle) > .toggle {
+  border-color: var(--toggle-border);
+  background-color: oklch(from var(--toggle-border) l c h/0.5);
+}
+label:has(:is(input[type="checkbox"]:disabled:checked, input[type="radio"]:disabled:checked)):has(.toggle) > .toggle::before { background-color: var(--toggle-border); }

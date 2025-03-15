@@ -1,0 +1,107 @@
+@charset "UTF-8";
+/* 체크박스 속성 값 */
+:root {
+  --checkbox-size: 1rem;
+  --checkbox-radius: 4px;
+  --checkbox-label-gap: 4px;
+}
+
+/* 체크박스 */
+input[type="checkbox"] {
+  appearance: none;
+
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  min-width: var(--checkbox-size);
+  min-height: var(--checkbox-size);
+
+  vertical-align: calc(var(--checkbox-size) / 7 * -1);
+  border: solid 2px var(--icon);
+  border-radius: var(--checkbox-radius);
+  background-color: transparent;
+}
+
+input[type="checkbox"]:focus-visible { outline: solid 2px var(--accent); }
+
+/* 체크박스 표시 */
+input[type="checkbox"]::before,
+input[type="checkbox"]::after {
+  position: absolute;
+  box-sizing: border-box;
+
+  content: "";
+
+  transition: var(--duration-ui);
+  transition-property: color, border-color, background-color;
+}
+
+input[type="checkbox"]::before {
+  width: 50%;
+  height: 90%;
+
+  border-right: solid 2px var(--main);
+  border-bottom: solid 2px var(--main);
+  opacity: 0;
+
+  transform: rotate(45deg) translate(-10%, -5%);
+}
+
+input[type="checkbox"]::after {
+  width: 80%;
+
+  border-bottom: solid 2px var(--main);
+  opacity: 0;
+}
+
+input[type="checkbox"]:disabled::before,
+input[type="checkbox"]:disabled::after { border-color: var(--main); }
+
+/* 활성화된 체크박스 */
+input[type="checkbox"]:not(:disabled):hover {
+  border-color: var(--accent);
+  cursor: pointer;
+}
+
+input[type="checkbox"]:not(:disabled):checked,
+input[type="checkbox"]:not(:disabled):indeterminate {
+  border-color: var(--accent);
+  background-color: var(--accent);
+}
+
+input[type="checkbox"]:not(:disabled):not(:indeterminate):checked::before,
+input[type="checkbox"]:not(:disabled):indeterminate::after { opacity: 0.7; }
+
+/* 비활성화된 체크박스 */
+input[type="checkbox"]:disabled { border-color: oklch(from var(--icon) l c h/0.25) }
+
+input[type="checkbox"]:disabled:hover { cursor: no-drop; }
+
+input[type="checkbox"]:disabled:checked,
+input[type="checkbox"]:disabled:indeterminate {
+  border-color: var(--accent-gs);
+  background-color: var(--accent-gs);
+}
+
+input[type="checkbox"]:disabled:not(:indeterminate):checked::before,
+input[type="checkbox"]:disabled:indeterminate::after { opacity: 0.7; }
+
+/* 라벨 */
+label:has(>input[type="checkbox"]) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--checkbox-label-gap);
+
+  user-select: none;
+}
+
+label:has(>input[type="checkbox"]) * { color: inherit; }
+
+label:has(>input[type="checkbox"]:not(:disabled)) { cursor: pointer; }
+
+label:has(>input[type="checkbox"]:disabled) {
+  color: var(--palette-3-gs);
+  cursor: no-drop;
+}

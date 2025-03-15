@@ -1,0 +1,249 @@
+@charset "UTF-8";
+body {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow-x: hidden;
+
+  width: 100%;
+  height: 100dvh;
+}
+
+header {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  width: 100%;
+  height: 65px;
+
+  border-bottom: solid 1px var(--border);
+  background-color: oklch(from var(--main) l c h/0.5);
+  backdrop-filter: blur(15px);
+}
+
+main {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  /* overflow-x: hidden; */
+  padding-top: 65px;
+
+  height: max-content;
+  flex-shrink: 0;
+}
+
+footer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  text-align: center;
+  color: var(--font-sub);
+}
+footer *:not(a) { color: inherit; }
+
+.wrap {
+  position: relative;
+  padding: var(--padding);
+
+  max-width: 100%;
+  width: calc(1200px + var(--padding) * 2);
+  height: max-content;
+  flex-shrink: 0;
+}
+.wrap > *:not(:last-child) { margin-bottom: var(--gap); }
+
+#logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#symbol,
+#logotype { height: 32px; }
+
+input[type="file"] { display: none; }
+
+.box {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding);
+  gap: var(--gap);
+
+  border: solid 1px var(--border);
+  border-radius: 6px;
+}
+
+#preview {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  max-width: 100%;
+  min-height: 200px;
+  width: max-content;
+  height: max-content;
+
+  border-radius: 6px;
+}
+
+#preview > img { max-width: 100%; }
+
+#preview-grid-container {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 50px;
+  height: 50px;
+}
+
+#preview-grid-container > div {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+}
+
+#preview-grid-container > div > div { display: flex; }
+
+#preview-grid-container > div > div > div {
+  border: solid 2px var(--accent);
+  background-color: oklch(from var(--accent) l c h/0.5);
+}
+
+#output {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  
+  min-height: 200px;
+  width: 100%;
+  height: max-content;
+
+  border-radius: 6px;
+}
+
+#output > div { display: flex; }
+
+.placeholder {
+  font-size: larger;
+  font-weight: bolder;
+  text-align: center;
+  word-break: keep-all;
+  color: var(--font-sub);
+}
+
+.output-item {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.output-item::before {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: oklch(from var(--black) l c h/0.5);
+  opacity: 0;
+  pointer-events: none;
+  content: "";
+
+  transition: opacity var(--duration-ui);
+}
+
+.output-item::after {
+  display: block;
+  position: absolute;
+  z-index: 2;
+
+  width: 32px;
+  height: 32px;
+
+  background-color: var(--white);
+  mask: no-repeat center/100% var(--lyra-icon-download);
+  opacity: 0;
+  pointer-events: none;
+  content: "";
+  
+  transition: opacity var(--duration-ui);
+}
+
+.output-item:hover::before,
+.output-item:hover::after { opacity: 1; }
+
+.output-item * { pointer-events: none; }
+
+#option-box {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+#option-box > .row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  place-items: center start;
+}
+
+#option-box > .row > label { width: 100%; }
+
+#option-box > .partition {
+  margin: var(--margin-large) 0;
+
+  width: 100%;
+  height: 1px;
+
+  background-color: var(--border);
+}
+
+#loading-screen {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap);
+  z-index: 120;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: oklch(from var(--black) l c h/0.5);
+  --font: var(--white);
+  --icon: var(--white);
+}
+#loading-screen > p { font-size: larger; }
+
+@media screen and (max-width: 1216px) {
+  #logotype { display: none; }
+  
+  #icon-table { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

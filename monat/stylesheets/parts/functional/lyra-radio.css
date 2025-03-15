@@ -1,0 +1,66 @@
+@charset "UTF-8";
+/* 라디오 버튼 속성 값 */
+:root {
+  --radio-size: 1rem;
+  --radio-radius: 50%;
+}
+
+/* 라디오 버튼 */
+input[type="radio"] {
+  appearance: none;
+
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  min-width: var(--radio-size);
+  min-height: var(--radio-size);
+
+  vertical-align: calc(var(--radio-size) / 7 * -1);
+  border: solid 2px var(--icon);
+  border-radius: var(--radio-radius);
+  background-color: transparent;
+}
+
+input[type="radio"]:focus-visible { outline: solid 2px var(--accent); }
+
+/* 활성화된 라디오 버튼 */
+input[type="radio"]:not(:disabled):hover {
+  border-color: var(--accent);
+  cursor: pointer;
+}
+
+input[type="radio"]:not(:disabled):checked {
+  border: solid 4px oklch(from var(--main) l c h/0.5);
+  background-color: var(--accent);
+}
+
+input[type="radio"]:not(:disabled):checked:hover { border: solid 4px oklch(from var(--main) l c h/0.7); }
+
+/* 비활성화된 라디오 버튼 */
+input[type="radio"]:disabled { border-color: oklch(from var(--icon) l c h/0.25); }
+input[type="radio"]:disabled:hover { cursor: no-drop; }
+
+input[type="radio"]:disabled:checked {
+  border: solid 4px oklch(from var(--main) l c h/0.5);
+  background-color: var(--icon);
+}
+
+/* 라벨 */
+label:has(input[type="radio"]) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--checkbox-label-gap);
+
+  user-select: none;
+}
+
+label:has(input[type="radio"]) * { color: inherit; }
+
+label:has(input[type="radio"]:not(:disabled)) { cursor: pointer; }
+
+label:has(input[type="radio"]:disabled) {
+  color: var(--accent-gs);
+  cursor: no-drop;
+}

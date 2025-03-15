@@ -1,0 +1,250 @@
+@charset "UTF-8";
+/* 선택 목록 속성값 */
+:root {
+  --select-size: 36px;
+  --select-padding: 8px;
+  --select-padding-offset: 4px;
+  --select-gap: 4px;
+  --select-radius: 6px;
+  
+  --select-border: var(--border);
+  --select-border-width: 1px;
+  --select-background: oklch(from var(--anti) l c h/0);
+  --select-background-disabled: oklch(from var(--anti) l c h/0.1);
+  
+  --select-list-background: var(--main);
+  --select-list-shadow: var(--shadow);
+}
+
+/* 라벨 */
+label:has(>select) {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--select-gap);
+  padding: var(--select-padding);
+
+  min-width: var(--select-size);
+  height: var(--select-size);
+
+  border: solid var(--select-border-width) var(--select-border);
+  border-radius: var(--select-radius);
+  background-color: var(--select-background);
+  user-select: none;
+}
+
+label:has(>select) > select {
+  position: absolute !important;
+
+  width: 0px !important;
+  height: 0px !important;
+
+  opacity: 0 !important;
+}
+
+label:has(>select) > i.select-arrow {
+  width: 12px;
+
+  mask-position: center;
+  mask-image: var(--lyra-icon-expand-s);
+}
+label:has(>select)[expanded] > i.select-arrow { mask-image: var(--lyra-icon-expand-n); }
+
+label:has(>select) > span {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+label:has(>select:not(:disabled)) { cursor: pointer; }
+label:has(>select:disabled) { cursor: no-drop; }
+
+label:has(>select:focus-visible) { outline: solid 2px var(--accent); }
+
+label:has(>select) > .outer { display: none; }
+
+/* 선택 목록 */
+label:has(>select) > .immersive-select-list {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  left: calc(var(--select-border-width) * -1);
+  top: calc(var(--select-size) + var(--select-gap));
+  overflow: hidden;
+
+  max-width: 550px;
+  max-height: 300px;
+  min-width: 250px;
+  width: calc(100% + var(--select-border-width) * 2);
+  height: max-content;
+  
+  border: solid var(--select-border-width) var(--select-border);
+  border-radius: var(--select-radius);
+  background-color: var(--select-list-background);
+  box-shadow: var(--select-list-shadow);
+  user-select: none;
+}
+
+label:has(>select) > .immersive-select-list input[type="checkbox"] {
+  position: absolute;
+  
+  opacity: 0;
+}
+
+label:has(>select)[listontop] > .immersive-select-list {
+  top: unset;
+  bottom: calc(var(--select-size) + var(--select-gap));
+}
+
+/* 선택 목록 검색창 */
+label:has(>select) > .immersive-select-list > label:has(>input[type="text"]) {
+  flex-shrink: 0;
+
+  border-top: unset;
+  border-left: unset;
+  border-right: unset;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
+}
+
+label:has(>select) > .immersive-select-list > .top-list > *,
+label:has(>select) > .immersive-select-list > .top-list > *::before { border-top: unset; }
+
+label:has(>select) > .immersive-select-list > .top-list > *:first-child,
+label:has(>select) > .immersive-select-list > .top-list > *:first-child::before {
+  border-left: unset;
+  border-bottom-left-radius: unset;
+}
+
+label:has(>select) > .immersive-select-list > .top-list > *:last-child,
+label:has(>select) > .immersive-select-list > .top-list > *:last-child::before {
+  border-right: unset;
+  border-bottom-right-radius: unset;
+}
+
+/* 선택 목록 */
+label:has(>select) > .immersive-select-list > ul {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow-y: scroll;
+
+  width: 100%;
+  height: 100%;
+  flex: 1;
+
+  list-style: none;
+}
+
+label:has(>select) > .immersive-select-list > ul > li { flex-shrink: 0; }
+
+label:has(>select) > .immersive-select-list > ul > li > label {
+  position: relative;
+  padding: var(--select-padding);
+
+  width: 100%;
+  height: var(--select-size);
+}
+
+label:has(>select) > .immersive-select-list > ul > li > label::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--anti);
+  opacity: 0;
+  pointer-events: none;
+  content: "";
+
+  transition: opacity var(--duration-ui);
+}
+:is(label:has(>select) > .immersive-select-list > ul > li > label:hover,
+label:has(>select) > .immersive-select-list > ul > li > label:has(input[type="checkbox"]:focus))::before { opacity: 0.1; }
+label:has(>select) > .immersive-select-list > ul > li > label:active::before { opacity: 0.2; }
+
+label:has(>select) > .immersive-select-list > ul > li:has(input[type="checkbox"]:not(:disabled):checked) {
+  color: var(--white);
+  background-color: var(--accent);
+  --icon: var(--white);
+}
+label:has(>select) > .immersive-select-list > ul > li:has(input[type="checkbox"]:not(:disabled):checked) * { color: inherit; }
+
+label:has(>select) > .immersive-select-list > ul > li:has(input[type="checkbox"]:disabled) {
+  color: var(--font-sub);
+  background-color: var(--sub);
+}
+
+label:has(>select) > .immersive-select-list > ul > li:has(input[type="checkbox"]:disabled:checked) {
+  color: var(--sub);
+  background-color: var(--font-sub);
+}
+
+label:has(>select) > .immersive-select-list > ul > li > label > span {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 조작 버튼 */
+label:has(>select) > .immersive-select-list > .button-list {
+  display: flex;
+  gap: 1px;
+
+  border-top: solid 1px var(--select-border);
+  background-color: var(--select-border);
+}
+
+label:has(>select) > .immersive-select-list > .button-list > button {
+  justify-content: center;
+
+  width: 100%;
+  flex: 1;
+
+  border: unset;
+  border-radius: unset;
+}
+label:has(>select) > .immersive-select-list > .button-list > button::before { border: unset; }
+
+@media screen and (max-width: 1216px) {
+  label:has(>select) > .immersive-select-list {
+    position: fixed;
+    left: var(--select-padding);
+    top: unset;
+    bottom: var(--select-padding);
+    z-index: 105;
+
+    max-width: calc(100% - var(--select-padding) * 2);
+
+    border-color: var(--accent);
+  }
+
+  label:has(>select) > .outer {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 104;
+  
+    width: 100%;
+    height: 100%;
+  
+    background-color: oklch(from var(--main) l c h/0.7);
+    backdrop-filter: blur(15px);
+    opacity: 0;
+    pointer-events: none;
+  
+    transition: opacity var(--duration-ui);
+  }
+
+  label:has(>select)[expanded] > .outer {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

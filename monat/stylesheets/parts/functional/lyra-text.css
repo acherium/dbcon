@@ -1,0 +1,121 @@
+@charset "UTF-8";
+/* 입력 칸 속성값 */
+:root {
+  --input-size: 36px;
+  --input-padding: 8px;
+  --input-padding-offset: 4px;
+  --input-gap: 4px;
+  --input-radius: 6px;
+  
+  --input-border: var(--border);
+  --input-background: oklch(from var(--anti) l c h/0);
+  --input-background-disabled: oklch(from var(--anti) l c h/0.1);
+}
+
+/* 입력 칸 */
+input[type="text"],
+input[type="number"] {
+  appearance: textfield;
+
+  position: relative;
+  padding: var(--input-padding) calc(var(--input-padding) + var(--input-padding-offset));
+
+  min-width: var(--input-size);
+  min-height: var(--input-size);
+
+  font-size: 1rem;
+  border: solid 1px var(--border);
+  border-radius: var(--input-radius);
+  outline: unset;
+  background-color: var(--input-background);
+}
+
+:is(input[type="text"], input[type="number"]):focus-visible { outline: solid 2px var(--accent); }
+
+/* 플레이스홀더 */
+:is(input[type="text"], input[type="number"])::placeholder {
+  color: oklch(from var(--font) l c h/0.5);
+
+  transition: color var(--duration-ui);
+}
+
+/* 라벨 내 입력 칸 */
+:is(label:has(>input[type="text"]), label:has(>input[type="number"])) {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  gap: var(--input-gap);
+  padding: var(--input-padding);
+  overflow: hidden;
+
+  min-width: var(--input-size);
+  height: var(--input-size);
+
+  border: solid 1px var(--input-border);
+  border-radius: var(--input-radius);
+  background-color: var(--input-background);
+  user-select: none;
+}
+
+:is(label:has(>input[type="text"]), label:has(>input[type="number"])) > * { color: inherit; }
+
+label > :is(input[type="text"], input[type="number"]) {
+  padding: 0 var(--input-padding-offset);
+
+  min-height: unset;
+
+  border: unset;
+  border-radius: unset;
+  background-color: transparent;
+}
+
+:is(label:has(>input[type="text"]), label:has(>input[type="number"]))::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--anti);
+  opacity: 0;
+  pointer-events: none;
+  content: "";
+
+  transition: opacity var(--duration-ui); 
+}
+
+label > p + input[type="text"] {
+  margin-left: var(--input-padding-offset);
+  padding-left: calc(var(--input-padding-offset) * 2);
+  border-left: solid 2px oklch(from var(--font) l c h/0.2);
+}
+
+:is(label:has(>input[type="text"]:not(:disabled)), label:has(>input[type="number"]:not(:disabled))):hover::after { opacity: 0.1; }
+:is(label:has(>input[type="text"]:not(:disabled)), label:has(>input[type="number"]:not(:disabled))):active::after { opacity: 0.2; }
+
+:is(label:has(>input[type="text"]:focus-visible), label:has(>input[type="number"]:focus-visible)) { outline: solid 2px var(--accent); }
+:is(label:has(>input[type="text"]:focus-visible), label:has(>input[type="number"]:focus-visible)) > :is(input[type="text"], input[type="number"]) { outline: unset; }
+
+/* 활성화된 입력 칸 */
+label:has(>input[type="text"]:not(:disabled), input[type="number"]:not(:disabled)) { cursor: text; }
+
+/* 비활성화된 입력 칸 */
+:is(input[type="text"], input[type="number"]):disabled {
+  color: var(--border);
+  background-color: var(--input-background-disabled);
+  cursor: no-drop;
+}
+
+label:has(>input[type="text"]:disabled, input[type="number"]:disabled) {
+  color: var(--border);
+  background-color: var(--input-background-disabled);
+  cursor: no-drop;
+}
+label:has(>input[type="text"]:disabled, input[type="number"]:disabled) > :is(input[type="text"], input[type="number"]) { background-color: transparent; }
+
+label:has(>input[type="text"], input[type="number"]) > :is(input[type="text"], input[type="number"]) { background-color: transparent; }
+
+/* 버튼 내부 아이콘 */
+label:has(>input[type="text"], input[type="number"]) > i::before { font-size: calc(1rem * 1.3); }
