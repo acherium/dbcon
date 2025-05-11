@@ -5,8 +5,9 @@
   --toggle-padding: 4px;
   --toggle-size: 28px;
   --toggle-length: 20px;
+  --toggle-border-width: 0px;
   --toggle-radius: calc(var(--toggle-size) / 2);
-  --toggle-border-width: 1px;
+  --toggle-background: var(--depth);
 
   --toggle-border: var(--border);
 }
@@ -36,7 +37,7 @@ label:has(:is(input[type="checkbox"], input[type="radio"])):has(.toggle) > .togg
 
   border: solid var(--toggle-border-width) var(--toggle-border);
   border-radius: var(--toggle-radius);
-  background-color: transparent;
+  background-color: var(--toggle-background);
 }
 
 label:has(:is(input[type="checkbox"], input[type="radio"]):focus-visible):has(.toggle) > .toggle { outline: solid 2px var(--accent); }

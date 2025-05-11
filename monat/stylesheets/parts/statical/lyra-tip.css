@@ -1,0 +1,27 @@
+@charset "UTF-8";
+/* 툴팁 속성 값 */
+:root {
+  --tip-padding: 5px 10px;
+  --tip-radius: 6px;
+
+  --tip-shadow: var(--shadow);
+}
+
+/* 툴팁 */
+tip {
+  display: inline-block;
+  position: fixed;
+  padding: var(--tip-padding);
+  z-index: 107;
+
+  max-width: calc(( 100dvw - var(--margin) * 2 ) * 0.8);
+  max-height: calc(( 100dvh - var(--margin) * 2 ) * 0.8);
+  width: max-content;
+  height: max-content;
+
+  color: var(--main);
+  border-radius: var(--tip-radius);
+  background-color: var(--font);
+  box-shadow: var(--tip-shadow);
+  pointer-events: none;
+}

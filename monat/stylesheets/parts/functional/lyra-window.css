@@ -2,27 +2,31 @@
 /* 창 속성 값 */
 :root {
   --window-area-padding: 8px;
-  
-  --window-border-width: 1px;
-  --window-radius: 6px;
-  --window-border-active: var(--accent);
-  --window-border-inactive: var(--border);
+  --window-radius: var(--radius-0);
+
+  --window-border-outer-width: 1px;
+  --window-border-outer-active: var(--depth-border);
+  --window-border-outer-inactive: var(--depth-border);
+
+  --window-border-inner-width: 0px;
 
   --window-inner-padding: 8px;
   --window-inner-background: var(--main);
   --window-inner-shadow: var(--shadow);
 
-  --window-titlebar-size: 36px;
+  --window-titlebar-size: 40px;
   --window-titlebar-padding: 8px;
   --window-titlebar-gap: 4px;
-  --window-titlebar-background: var(--main);
+  --window-titlebar-active: var(--depth-1);
+  --window-titlebar-inactive: var(--depth-2);
   --window-titlebar-font-active: var(--font);
   --window-titlebar-font-inactive: var(--font-sub);
 
   --window-bottom-padding: 8px;
   --window-bottom-gap: 4px;
+  --window-bottom-border-width: 0px;
   --window-bottom-border: var(--border);
-  --window-bottom-background: var(--sub);
+  --window-bottom-background: var(--depth-1);
 }
 
 /* 창 */
@@ -47,6 +51,7 @@ window > inner {
   flex-direction: column;
   left: 0;
   top: 0;
+  padding: var(--window-border-inner-width);
   z-index: 1;
   overflow: hidden;
 
@@ -56,25 +61,11 @@ window > inner {
   height: max-content;
   flex-shrink: 0;
 
-  border: solid var(--window-border-width) var(--window-border-inactive);
+  border: solid var(--window-border-outer-width) var(--window-border-outer-inactive);
   border-radius: var(--window-radius);
   background-color: var(--window-inner-background);
   box-shadow: var(--window-inner-shadow);
   pointer-events: auto;
-
-  /* animation: var(--duration-ui) cubic-bezier(0.02, 0.61, 0.47, 0.99) both ani-window-open; */
-}
-@keyframes ani-window-open {
-  from {
-    opacity: 0;
-
-    transform: translateY(10px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-
-    transform: translateY(0px) scale(1);
-  }
 }
 
 window > outer {
@@ -138,6 +129,7 @@ window > inner > titlebar > .left > .icon {
 
   width: 20px;
   height: 20px;
+  flex-shrink: 0;
 }
 window > inner > titlebar > .left > span {
   overflow: hidden;
@@ -156,35 +148,49 @@ window > inner > titlebar > .right {
 window > inner > titlebar > .right > button {
   justify-content: center;
 
+  height: 100%;
+  aspect-ratio: 1/1;
+
   border-radius: unset;
+  background-color: var(--window-titlebar-inactive);
 }
 window > inner > titlebar > .right > button::before { border: unset; }
 
 /* 주 영역 */
 window > inner > windowbody {
-  display: block;
-  padding: var(--window-inner-padding);
+  display: flex;
+  flex-direction: column;
 
   width: 100%;
   height: 100%;
   flex: 1;
 }
 
+window > inner > windowbody > windowmain {
+  display: block;
+  padding: var(--window-inner-padding);
+
+  width: 100%;
+  height:100%;
+  flex: 1;
+}
+
 /* 하단 영역 */
-window > inner > bottom {
+window > inner > windowbody > bottom {
   display: flex;
   position: relative;
   align-items: center;
   justify-content: center;
+  margin-top: auto;
   padding: var(--window-bottom-padding);
 
   width: 100%;
 
-  border-top: solid 1px var(--window-bottom-border);
+  border-top: solid var(--window-bottom-border-width) var(--window-bottom-border);
   background-color: var(--window-bottom-background);
 }
 
-window > inner > bottom > :is(.left, .right) {
+window > inner > windowbody > bottom > :is(.left, .right) {
   display: flex;
   position: relative;
   align-items: center;
@@ -198,14 +204,14 @@ window > inner > bottom > :is(.left, .right) {
   background-color: inherit;
 }
 
-window > inner > bottom > .left { margin-right: auto; }
+window > inner > windowbody > bottom > .left { margin-right: auto; }
 
-window > inner > bottom > .right {
+window > inner > windowbody > bottom > .right {
   flex-direction: row-reverse;
   margin-left: auto;
 }
 
-window > inner > bottom > :is(.left, .right) > button[accent] { order: -1; }
+window > inner > windowbody > bottom > :is(.left, .right) > button[accent] { order: -1; }
 
 /* 크기 조절 포인터 */
 window > inner > resizepointer {
@@ -224,10 +230,13 @@ window > inner > resizepointer {
 }
 
 /* 활성 상태 창 */
-window[active] > inner { border-color: var(--window-border-active); }
-window[active] > inner > titlebar { border-color: var(--window-titlebar-active); }
+window[active] > inner { border-color: var(--window-border-outer-active); }
+window[active] > inner > titlebar { background-color: var(--window-titlebar-active); }
 window[active] > inner > titlebar > .left > span { color: var(--window-titlebar-font-active); }
-window[active] > inner > titlebar > .right > button { --icon: var(--window-titlebar-font-active); }
+window[active] > inner > titlebar > .right > button {
+  background-color: var(--window-titlebar-active);
+  --icon: var(--window-titlebar-font-active);
+}
 
 /* 최대화 */
 window[maximized]:not([minimized]) { padding: 0 !important; }

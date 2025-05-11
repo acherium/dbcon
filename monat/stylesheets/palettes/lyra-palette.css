@@ -89,14 +89,33 @@
   --font-sub: oklch(50% 0 0);
   --icon: oklch(0% 0 0/0.5);
   --anti: oklch(0% 0 0);
+  --anti-border: oklch(40% 0 0);
   --shadow: 0 2px 10px oklch(from var(--anti) l c h/0.1);
 
   /* 기본 요소 - 그레이스케일 */
-  --main-gs: oklch(from var(--palette-1) l 0 h);
-  --sub-gs: oklch(from var(--palette-2) l 0 h);
-  --border-gs: oklch(from var(--palette-4) l 0 h);
-  --font-gs: oklch(from var(--palette-5) l 0 h);
-  --anti-gs: oklch(from var(--palette-5) l 0 h);
+  --main-gs: oklch(from var(--main) l 0 h);
+  --sub-gs: oklch(from var(--sub) l 0 h);
+  --border-gs: oklch(from var(--border) l 0 h);
+  --font-gs: oklch(from var(--font) l 0 h);
+  --font-sub-gs: oklch(from var(--font-sub) l 0 h);
+  --icon-gs: oklch(from var(--icon) l 0 h);
+  --anti-gs: oklch(from var(--anti) l 0 h);
+  --anti-border-gs: oklch(from var(--anti-border) l 0 h);
+
+  /* 깊이에 따른 영역 색상 */
+  --depth-0: oklch(100% 0 0);
+  --depth-1: oklch(96% 0 0);
+  --depth-2: oklch(90% 0 0);
+  --depth-3: oklch(85% 0 0);
+  --depth: oklch(0% 0 0/0.05);
+  --depth-border: oklch(0% 0 0/0.15);
+
+  /* 깊이 - 그레이스케일 */
+  --depth-0-gs: oklch(from var(--depth-0) l 0 h);
+  --depth-1-gs: oklch(from var(--depth-1) l 0 h);
+  --depth-2-gs: oklch(from var(--depth-2) l 0 h);
+  --depth-3-gs: oklch(from var(--depth-3) l 0 h);
+  --depth-gs: oklch(from var(--depth) l 0 h/0.5);
 
   /* 공통 속성 */
   /* 마진 */
@@ -128,6 +147,12 @@
   --radius-large: 20px;
   --radius: var(--radius-small);
 
+  /* 깊이에 따른 곡률 */
+  --radius-0: var(--radius);
+  --radius-1: calc(var(--radius-0) + var(--padding));
+  --radius-2: calc(var(--radius-1) + var(--padding));
+  --radius-3: calc(var(--radius-2) + var(--padding));
+
   /* 트랜지션 */
   --duration-ui: 0.15s;
 }
@@ -153,6 +178,13 @@
     --icon: oklch(100% 0 0/0.5);
     --anti: oklch(100% 0 0);
     --shadow: 0 2px 10px oklch(from var(--anti) l c h/0.1);
+
+    /* 깊이에 따른 영역 색상 */
+    --depth-0: oklch(0% 0 0);
+    --depth-1: oklch(20% 0 0);
+    --depth-2: oklch(25% 0 0);
+    --depth-3: oklch(30% 0 0);
+    --depth: oklch(100% 0 0/0.07);
   }
 }
 
@@ -174,5 +206,14 @@
   --font-sub: oklch(50% 0 0);
   --icon: oklch(100% 0 0/0.5);
   --anti: oklch(100% 0 0);
+  --anti-border: oklch(80% 0 0);
   --shadow: 0 2px 10px oklch(from var(--anti) l c h/0.1);
+
+  /* 깊이에 따른 영역 색상 */
+  --depth-0: oklch(0% 0 0);
+  --depth-1: oklch(20% 0 0);
+  --depth-2: oklch(25% 0 0);
+  --depth-3: oklch(30% 0 0);
+  --depth: oklch(100% 0 0/0.07);
+  --depth-border: oklch(100% 0 0/0.25);
 }

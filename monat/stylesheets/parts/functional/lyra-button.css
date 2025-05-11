@@ -4,14 +4,14 @@
   --button-size: 36px;
   --button-padding: 8px;
   --button-gap: 4px;
-  --button-radius: 6px;
+  --button-radius: var(--radius-0);
 
   --float-button-size: 44px;
   --float-button-padding: 12px;
   --float-button-radius: 22px;
 
   --button-border: var(--border);
-  --button-background: oklch(from var(--main) l c h/1);
+  --button-background: var(--depth);
 }
 
 /* 버튼 공통 */
@@ -35,12 +35,11 @@ button {
 
 button:focus-visible { outline: solid 2px var(--accent); }
 
-button::before,
+/* button::before, */
 button::after {
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 1;
   box-sizing: border-box;
 
   width: 100%;
@@ -53,7 +52,7 @@ button::after {
   transition-property: opacity, border-color;
 }
 
-button::before { border: solid 1px var(--button-border); }
+/* button::before { border: solid 1px var(--button-border); } */
 button::after {
   background-color: var(--black);
   opacity: 0;
@@ -67,7 +66,7 @@ button > * {
 
 button[outline] { background-color: transparent; }
 button[blank] { background-color: transparent; }
-button[blank]::before { border-color: transparent; }
+/* button[blank]::before { border-color: transparent !important; } */
 
 /* 활성화된 버튼 */
 button:not(:disabled) { cursor: pointer; }
@@ -81,8 +80,8 @@ button:disabled {
 }
 
 /* 활성화된 색상 버튼 */
-:is(button[accent], button[red], button[orange], button[yellow], button[green], button[blue], button[navy], button[purple],
-button[turquoise], button[skyblue], button[pink])::before { border-color: oklch(0% 0 0/0.5); }
+/* :is(button[accent], button[red], button[orange], button[yellow], button[green], button[blue], button[navy], button[purple],
+button[turquoise], button[skyblue], button[pink])::before { border-color: oklch(0% 0 0/0.5); } */
 
 button[accent]:not(:disabled) {
   color: var(--white);
@@ -232,5 +231,5 @@ button[float] {
   background-color: var(--anti);
   --icon: var(--main);
 }
-button[float]::before { content: unset; }
+/* button[float]::before { content: unset; } */
 button[float]::after { background-color: var(--main); }

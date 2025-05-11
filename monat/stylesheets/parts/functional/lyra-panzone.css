@@ -1,0 +1,38 @@
+@charset "UTF-8";
+/* 패닝 존 속성값 */
+
+/* 패닝 존 */
+panzone {
+  display: block;
+  position: relative;
+  overflow: hidden;
+
+  touch-action: none;
+}
+
+panzone .scale-layer {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+  touch-action: none;
+}
+
+panzone .position-layer {
+  position: relative;
+  overflow: visible;
+
+  width: max-content;
+  height: max-content;
+
+  pointer-events: none;
+  touch-action: none;
+}
+
+panzone .position-layer > * { pointer-events: auto; }

@@ -3,6 +3,14 @@
 :root {
   --radio-size: 1rem;
   --radio-radius: 50%;
+
+  --radio-button-size: 36px;
+  --radio-button-padding: 8px;
+  --radio-button-gap: 4px;
+  --radio-button-radius: 6px;
+
+  --radio-button-border: var(--border);
+  --radio-button-background: oklch(from var(--main) l c h/1);
 }
 
 /* 라디오 버튼 */
@@ -48,7 +56,7 @@ input[type="radio"]:disabled:checked {
 }
 
 /* 라벨 */
-label:has(input[type="radio"]) {
+label:not([buttonlike]):has(input[type="radio"]) {
   display: inline-flex;
   align-items: center;
   gap: var(--checkbox-label-gap);
@@ -56,11 +64,98 @@ label:has(input[type="radio"]) {
   user-select: none;
 }
 
-label:has(input[type="radio"]) * { color: inherit; }
+label:not([buttonlike]):has(input[type="radio"]) * { color: inherit; }
 
-label:has(input[type="radio"]:not(:disabled)) { cursor: pointer; }
+label:not([buttonlike]):has(input[type="radio"]:not(:disabled)) { cursor: pointer; }
 
-label:has(input[type="radio"]:disabled) {
+label:not([buttonlike]):has(input[type="radio"]:disabled) {
   color: var(--accent-gs);
   cursor: no-drop;
 }
+
+/* 버튼 형태 라벨 */
+label[buttonlike]:has(>input[type="radio"]) {
+  display: flex;
+  position: relative;
+  gap: var(--radio-button-gap);
+  padding: var(--radio-button-padding);
+  place-items: center start;
+
+  min-width: var(--radio-button-size);
+  height: var(--radio-button-size);
+
+  font-size: 11pt;
+  color: var(--font);
+  border: unset;
+  border-radius: var(--radio-button-radius);
+  background-color: var(--radio-button-background);
+  user-select: none;
+}
+
+label[buttonlike]:has(>input[type="radio"]):focus-visible { outline: solid 2px var(--accent); }
+
+label[buttonlike]:has(>input[type="radio"])::before,
+label[buttonlike]:has(>input[type="radio"])::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: inherit;
+  content: "";
+
+  transition: var(--duration-ui);
+  transition-property: opacity, border-color;
+}
+
+label[buttonlike]:has(>input[type="radio"])::before { border: solid 1px var(--radio-button-border); }
+label[buttonlike]:has(>input[type="radio"])::after {
+  background-color: var(--black);
+  opacity: 0;
+}
+
+label[buttonlike]:has(>input[type="radio"]) > * {
+  color: inherit;
+  user-select: none;
+  pointer-events: none;
+}
+
+label[buttonlike]:has(>input[type="radio"])[outline] { background-color: transparent; }
+label[buttonlike]:has(>input[type="radio"])[blank] { background-color: transparent; }
+label[buttonlike]:has(>input[type="radio"])[blank]::before { border-color: transparent !important; }
+
+label[buttonlike]:has(>input[type="radio"]) > input[type="radio"] {
+  position: absolute;
+
+  opacity: 0;
+}
+
+/* 활성화된 버튼 형태 라벨 */
+label[buttonlike]:has(>input[type="radio"]:not(:disabled)) { cursor: pointer; }
+label[buttonlike]:has(>input[type="radio"]:not(:disabled)):hover::after { opacity: 0.1; }
+label[buttonlike]:has(>input[type="radio"]:not(:disabled)):active::after { opacity: 0.2; }
+
+label[buttonlike]:has(>input[type="radio"]:not(:disabled):checked) {
+  color: var(--white);
+  background-color: var(--accent);
+  --icon: var(--white);
+}
+
+label[buttonlike]:has(>input[type="radio"]:not(:disabled):checked)::before { border-color: oklch(0% 0 0/0.5); }
+
+/* 비활성화된 버튼 */
+label[buttonlike]:has(>input[type="radio"]:disabled) {
+  color: var(--palette-3-gs);
+  cursor: no-drop;
+}
+
+label[buttonlike]:has(>input[type="radio"]:disabled:checked) {
+  color: var(--border);
+  background-color: var(--accent-gs);
+  --icon: var(--border);
+}
+
+label[buttonlike]:has(>input[type="radio"]:disabled:checked)::before { border-color: oklch(0% 0 0/0.5); }

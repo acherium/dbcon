@@ -115,7 +115,7 @@ export const $sa = (query, target = root) => {
 };
 
 /**
- * create 함수 매개변수 구조체
+ * create 함수 매개변수 구조체.
  * @typedef {object} LyraCreateParameters
  * @property {string} [id] 요소에 적용할 ID의 이름.
  * @property {array} [classes] 요소에 적용할 클래스의 목록.

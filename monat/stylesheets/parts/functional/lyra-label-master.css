@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* 인풋, 라벨 그룹화 */
 [withnext]:has(+:is(label, button)) {
-  margin-right: calc(var(--gap) * -1);
+  margin-right: calc(var(--gap) * -1 + 1px);
 
   border-right: unset !important;
   border-top-right-radius: unset !important;

@@ -1,0 +1,48 @@
+@charset "UTF-8";
+/* 툴바 공통 */
+:root {
+  --toolbar-padding: var(--padding);
+  --toolbar-gap: 4px;
+  --toolbar-radius: var(--radius-1);
+  --toolbar-border-width: 0px;
+
+  --toolbar-border: var(--border);
+  --toolbar-background: var(--depth-1);
+  --toolbar-shadow: var(--shadow);
+
+  --toolbar-partition-size: 30px;
+}
+
+/* 툴바 */
+toolbar {
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: var(--toolbar-gap);
+  padding: var(--toolbar-padding);
+  overflow-y: hidden;
+
+  max-width: calc(100% - var(--margin) * 2);
+  width: max-content;
+  height: max-content;
+
+  border: solid var(--toolbar-border-width) var(--toolbar-border);
+  border-radius: var(--toolbar-radius);
+  background-color: var(--toolbar-background);
+  box-shadow: var(--toolbar-shadow);
+}
+
+toolbar > * { flex-shrink: 0; }
+
+toolbar > .divline {
+  width: 1px;
+  height: var(--toolbar-partition-size);
+
+  background-color: var(--depth-border);
+}
+
+/* 툴바 접기/펴기 */
+toolbar:not([noshrink])[shrink] *:not(button[shrinktoolbar], button[shrinktoolbar] > i) { display: none; }
+
+toolbar:not([noshrink]) button[shrinktoolbar] i { mask-image: var(--lyra-icon-arrowhead-w-double); }
+toolbar:not([noshrink])[shrink] button[shrinktoolbar] i { mask-image: var(--lyra-icon-arrowhead-e-double); }

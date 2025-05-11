@@ -1,0 +1,70 @@
+<window class="LYRA-COLOR-PICKER" width="640" height="480" size="fit-content" position="center" fixsize maximizable="false" minimizable="false">
+  <link rel="stylesheet" href="./monat/templates/stylesheets/LyraColorPicker.css">
+  <inner>
+    <titlebar>
+      <div class="left"><i class="palette"></i><span>색상 선택기</span></div>
+      <div class="right"><button closewindow></button></div>
+    </titlebar>
+    <windowbody>
+      <windowmain>
+        <div class="COLOR-PICKER-AREA list-row">
+          <div class="PREVIEW"></div>
+          <div class="RANGES list-column">
+            <div class="RANGE-ITEM">
+              <p>R</p>
+              <div class="RANGE-SLOT">
+                <label red controller><input type="range" class="RANGE RGB RED" mode="RGB" target="R" min="0" max="255" step="0" value="0" autocomplete="off"></label>
+              </div>
+            </div>
+            <div class="RANGE-ITEM">
+              <p>G</p>
+              <div class="RANGE-SLOT">
+                <label green controller><input type="range" class="RANGE RGB GREEN" mode="RGB" target="G" min="0" max="255" step="0" value="0" autocomplete="off"></label>
+              </div>
+            </div>
+            <div class="RANGE-ITEM">
+              <p>B</p>
+              <div class="RANGE-SLOT">
+                <label blue controller><input type="range" class="RANGE RGB BLUE" mode="RGB" target="B" min="0" max="255" step="0" value="0" autocomplete="off"></label>
+              </div>
+            </div>
+            <div class="RANGE-ITEM">
+              <p>H</p>
+              <div class="RANGE-SLOT">
+                <label controller><input type="range" class="RANGE HSL HUE" mode="HSL" target="H" min="0" max="360" step="0" value="0" autocomplete="off"></label>
+              </div>
+            </div>
+            <div class="RANGE-ITEM">
+              <p>S</p>
+              <div class="RANGE-SLOT">
+                <label controller><input type="range" class="RANGE HSL SATURATION" mode="HSL" target="S" min="0" max="100" step="0" value="0" autocomplete="off"></label>
+              </div>
+            </div>
+            <div class="RANGE-ITEM">
+              <p>L</p>
+              <div class="RANGE-SLOT">
+                <label controller><input type="range" class="RANGE HSL LUMINOSITY" mode="HSL" target="L" min="0" max="100" step="0" value="0" autocomplete="off"></label>
+              </div>
+            </div>
+            <div class="RANGE-ITEM">
+              <p>A</p>
+              <div class="RANGE-SLOT">
+                <label controller><input type="range" class="RANGE ALPHA" target="A" min="0" max="100" step="0" value="0" autocomplete="off"></label>
+              </div>
+            </div>
+            <div class="RANGE-ITEM">
+              <p>HEX</p>
+              <div class="RANGE-SLOT">
+                <label withnext><span>#</span><input type="text" class="INPUT HEX"></label><button class="BUTTON HEX"><i class="copy"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </windowmain>
+      <bottom>
+        <div class="left"><button class="CHANGE-COLOR-MODE"><span class="COLOR-MODE"></span></button></div>
+        <div class="right"><button accent closewindow><span>닫기</span></button></div>
+      </bottom>
+    </windowbody>
+  </inner>
+</window>

@@ -5,11 +5,11 @@
   --input-padding: 8px;
   --input-padding-offset: 4px;
   --input-gap: 4px;
-  --input-radius: 6px;
+  --input-radius: var(--radius-0);
   
   --input-border: var(--border);
-  --input-background: oklch(from var(--anti) l c h/0);
-  --input-background-disabled: oklch(from var(--anti) l c h/0.1);
+  --input-background: var(--depth);
+  --input-background-disabled: var(--depth);
 }
 
 /* 입력 칸 */
@@ -24,7 +24,8 @@ input[type="number"] {
   min-height: var(--input-size);
 
   font-size: 1rem;
-  border: solid 1px var(--border);
+  border: unset;
+  /* border: solid 1px var(--border); */
   border-radius: var(--input-radius);
   outline: unset;
   background-color: var(--input-background);
@@ -51,7 +52,7 @@ input[type="number"] {
   min-width: var(--input-size);
   height: var(--input-size);
 
-  border: solid 1px var(--input-border);
+  /* border: solid 1px var(--input-border); */
   border-radius: var(--input-radius);
   background-color: var(--input-background);
   user-select: none;

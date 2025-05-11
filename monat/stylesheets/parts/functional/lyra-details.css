@@ -5,8 +5,9 @@
   --details-padding: 8px;
   --details-radius: 6px;
   
+  --details-border-width: 0px;
   --details-border: var(--border);
-  --details-background: oklch(from var(--anti) l c h/0);
+  --details-background: var(--depth);
 }
 
 /* 아코디언 */
@@ -18,7 +19,7 @@ details {
   max-width: 100%;
   
   font-size: 1rem;
-  border: solid 1px var(--border);
+  border: solid var(--details-border-width) var(--details-border);
   border-radius: var(--details-radius);
   outline: unset;
   background-color: var(--details-background);

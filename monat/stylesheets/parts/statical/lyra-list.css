@@ -29,3 +29,25 @@
   .list { flex-direction: column; }
   .list-rev { flex-direction: column-reverse; }
 }
+
+/* 그리드 목록 */
+.list-grid {
+  container: list-grid / size;
+}
+
+.list-grid > .wrap {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: minmax(0, auto);
+  gap: var(--gap);
+  margin: 0;
+}
+
+@container list-grid (max-width: 1000px) {
+  .list-grid > .wrap { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@container list-grid (max-width: 700px) {
+  .list-grid > .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

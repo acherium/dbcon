@@ -1,0 +1,88 @@
+@charset "UTF-8";
+/* 알림 속성 값 */
+:root {
+  --notification-area-padding: 0 8px 40px;
+  --notification-area-gap: 8px;
+
+  --notification-padding: 12px 16px;
+  --notification-gap: 8px;
+  --notification-radius: 6px;
+
+  --notification-font: var(--main);
+  --notification-background: var(--anti);
+  --notification-shadow: var(--shadow);
+
+  --notification-bottom-border: var(--anti-border);
+}
+
+/* 알림 영역 */
+#LYRA-NOTIFICATION-AREA {
+  display: flex;
+  position: fixed;
+  align-items: flex-end;
+  right: 0;
+  bottom: 0;
+  padding: var(--notification-area-padding);
+  z-index: 109;
+
+  max-width: 100%;
+  width: 400px;
+  height: 100%;
+  
+  pointer-events: none;
+}
+
+#LYRA-NOTIFICATION-AREA > .WRAP {
+  display: flex;
+  position: relative;
+  flex-direction: column-reverse;
+  gap: var(--notification-area-gap);
+  overflow-x: hidden;
+
+  max-height: 100%;
+  width: 100%;
+  height: max-content;
+}
+
+/* 알림 */
+notification {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding: var(--notification-padding);
+  gap: var(--notification-gap);
+
+  width: 100%;
+
+  color: var(--notification-font);
+  border-radius: var(--notification-radius);
+  background-color: var(--notification-background);
+  box-shadow: var(--notification-shadow);
+  pointer-events: auto;
+  --icon: var(--notification-font);
+}
+
+notification > bottom {
+  display: flex;
+  position: relative;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  padding-top: var(--notification-gap);
+  order: 100;
+
+  width: 100%;
+
+  border-top: solid 1px var(--notification-bottom-border);
+}
+
+notification * { color: inherit; }
+notification > * {
+  flex-shrink: 0;
+
+  line-height: 1;
+}
+notification > bottom > * { flex-shrink: 0; }
+
+notification > h1 { font-size: 1.3em; }
+notification > h2 { font-size: 1.2em; }
+notification > h3, h4, h5, h6 { font-size: 1.1em; }
